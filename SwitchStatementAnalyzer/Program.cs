@@ -46,14 +46,33 @@ namespace SwitchStatementAnalyzer
 				{
 					IdentifierNameSyntax identifierName = switchStatement.DescendantNodes().OfType<IdentifierNameSyntax>().First();
 					ITypeSymbol identifierType = semanticModel.GetTypeInfo(identifierName).Type;
-
-					if (identifierType.TypeKind == TypeKind.Enum) 
+					
+					if (identifierType.TypeKind != TypeKind.Enum) 
 					{
-						Console.WriteLine($"Switch по перечислению, количество членов в перечислении: {identifierType.GetMembers().Length - 1}");
+						continue;
 					}
-
+					//Console.WriteLine(identifierType.GetMembers().First().Name);
+					Console.WriteLine($"Switch по перечислению, количество членов в перечислении: {identifierType.GetMembers().Length - 1}");
+					bool defaultCaseDetected = false;
 					IEnumerable<DefaultSwitchLabelSyntax> defaultSwitch = switchStatement.DescendantNodes().OfType<DefaultSwitchLabelSyntax>();
-					if (defaultSwitch.Count() > 0) { Console.WriteLine("Default case detected"); }
+					if (defaultSwitch.Count() > 0) 
+					{ 
+						defaultCaseDetected = true;
+						continue;
+					}
+					List<string> enumMembers = new List<string>();
+					foreach (var enumMember in identifierType.GetMembers())
+					{
+						enumMembers.Add(enumMember.Name);
+					}
+					IEnumerable<SwitchSectionSyntax> switchCaseLabels = switchStatement.DescendantNodes().OfType<SwitchSectionSyntax>();
+					Console.WriteLine(switchCaseLabels.Count());
+					foreach (SwitchSectionSyntax switchCaseLabel in switchCaseLabels)
+					{
+						
+					}
+					//ISymbol gag = semanticModel.GetSymbolInfo(switchCaseLabel.ElementAt(1)).Symbol;
+					//Console.WriteLine(gag.Name);
 				}
 			}
 
