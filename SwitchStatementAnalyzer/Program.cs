@@ -20,7 +20,7 @@ namespace SwitchStatementAnalyzer
 		{
 			if (args.Length != 2) 
 			{
-				Console.WriteLine("Invalid input, type -h for help");
+				Console.WriteLine("Invalid input, args must contain sln/csproj path and log path");
 				return;
 			}
 			// Creating workspace
@@ -28,23 +28,17 @@ namespace SwitchStatementAnalyzer
 			MSBuildWorkspace workspace = MSBuildWorkspace.Create();
 
 			// Openning solution or project
-			//Project currProject;
 			IEnumerable<Project> projects = new List<Project>();
 
 			if (args[0].EndsWith("sln"))
 			{
-				Console.WriteLine("SLN");
 				Solution solution = workspace.OpenSolutionAsync(args[0]).Result;
 				projects = solution.Projects;
-				//currProject = projects.ElementAt(0);
 			}
 			else
 			{
-				Console.WriteLine("CSPROJ");
 				Project project = workspace.OpenProjectAsync(args[0]).Result;
 				projects = projects.Append(project);
-				//projects = workspace.OpenProjectAsync(args[0]).Result;
-				//currProject = workspace.OpenProjectAsync(args[0]).Result;
 			}
 
 			foreach (Project currProject in projects)
@@ -53,7 +47,6 @@ namespace SwitchStatementAnalyzer
 				Compilation compilation = currProject.GetCompilationAsync().Result;
 				StreamWriter stream = new StreamWriter(args[1], false, Encoding.UTF8);
 
-				Console.WriteLine(currProject.Documents.Count());
 				foreach (var file in currProject.Documents)
 				{
 					Console.WriteLine($"Analyzing file: {file.Name}");
@@ -73,7 +66,6 @@ namespace SwitchStatementAnalyzer
 							continue;
 						}
 
-						Console.WriteLine($"Switch по перечислению, количество членов в перечислении: {identifierType.GetMembers().Length - 1}");
 						IEnumerable<DefaultSwitchLabelSyntax> defaultSwitch = switchStatement.DescendantNodes().OfType<DefaultSwitchLabelSyntax>();
 
 						// Перестаем рассматривать switch если у него есть default или в перечислении меньше 3 элементов
