@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwitchStatementAnalyzer", "SwitchStatementAnalyzer.csproj", "{382F0D2B-6EC5-4239-8074-341C68696BF6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "..\Tests\Tests.csproj", "{17C6A00A-0A20-46B8-8BF1-AC3AF77312A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{382F0D2B-6EC5-4239-8074-341C68696BF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{382F0D2B-6EC5-4239-8074-341C68696BF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{382F0D2B-6EC5-4239-8074-341C68696BF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17C6A00A-0A20-46B8-8BF1-AC3AF77312A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17C6A00A-0A20-46B8-8BF1-AC3AF77312A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17C6A00A-0A20-46B8-8BF1-AC3AF77312A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17C6A00A-0A20-46B8-8BF1-AC3AF77312A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
